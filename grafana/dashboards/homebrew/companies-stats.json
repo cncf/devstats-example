@@ -32,8 +32,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 55,
-  "iteration": 1529598249198,
+  "id": 3,
+  "iteration": 1534950763322,
   "links": [],
   "panels": [
     {
@@ -284,7 +284,10 @@
     "list": [
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "Homebrew",
+          "value": "Homebrew"
+        },
         "datasource": "psql",
         "hide": 2,
         "includeAll": false,
@@ -355,8 +358,8 @@
         "allValue": null,
         "current": {
           "tags": [],
-          "text": "All activity",
-          "value": "activity"
+          "text": "Contributions",
+          "value": "contributions"
         },
         "hide": 0,
         "includeAll": false,
@@ -365,7 +368,7 @@
         "name": "metric",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "All activity",
             "value": "activity"
           },
@@ -390,7 +393,7 @@
             "value": "commits"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Contributions",
             "value": "contributions"
           },
@@ -411,7 +414,10 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": "All"
+        },
         "datasource": "psql",
         "hide": 0,
         "includeAll": false,
@@ -432,7 +438,10 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "all",
+          "value": "all"
+        },
         "datasource": "psql",
         "hide": 2,
         "includeAll": false,
@@ -453,7 +462,10 @@
       },
       {
         "allValue": "",
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": "psql",
         "hide": 0,
         "includeAll": true,
@@ -475,7 +487,7 @@
     ]
   },
   "time": {
-    "from": "now-2y",
+    "from": "now-1y",
     "to": "now"
   },
   "timepicker": {
@@ -506,5 +518,5 @@
   "timezone": "",
   "title": "Companies stats",
   "uid": "4",
-  "version": 2
+  "version": 4
 }

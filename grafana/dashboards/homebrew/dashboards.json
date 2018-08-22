@@ -31,8 +31,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 29,
-  "iteration": 1529598252953,
+  "id": 4,
+  "iteration": 1534950775350,
   "links": [],
   "panels": [
     {
@@ -170,7 +170,7 @@
       "description": "https://github.com/cncf/devstats",
       "folderId": 0,
       "gridPos": {
-        "h": 27,
+        "h": 5,
         "w": 24,
         "x": 0,
         "y": 6
@@ -210,7 +210,10 @@
     "list": [
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "Homebrew",
+          "value": "Homebrew"
+        },
         "datasource": "psql",
         "hide": 2,
         "includeAll": false,
@@ -232,7 +235,7 @@
     ]
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-30d",
     "to": "now-1h"
   },
   "timepicker": {
@@ -264,5 +267,5 @@
   "timezone": "",
   "title": "Dashboards",
   "uid": "8",
-  "version": 10
+  "version": 4
 }
