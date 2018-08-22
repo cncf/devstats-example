@@ -1,6 +1,6 @@
 # Example DevStats deployment - Homebrew
 
-This is installed [here](http://147.75.97.234:3001/login), it uses neither DNS nor SSL.
+This is installed [here](http://147.75.97.234:3001), it uses neither DNS nor SSL.
 
 - To install: `vim INSTALL_UBUNTU18.md`.
 - To deploy use: `PG_PASS=... PG_PASS_RO=... PG_PASS_TEAM=... ./deploy.sh`.
