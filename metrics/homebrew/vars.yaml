@@ -1,0 +1,11 @@
+---
+vars:
+  - name: os_hostname
+    type: s
+    command: [hostname]
+  - name: full_name
+    type: s
+    value: Homebrew
+  - name: lower_name
+    type: s
+    value: homebrew
