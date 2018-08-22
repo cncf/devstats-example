@@ -59,12 +59,13 @@ Prerequisites:
     - `PG_PASS=... PG_PASS_RO=... PG_PASS_TEAM=... ./deploy.sh`.
     - You can also take a look at DevStats' `ADDING_NEW_PROJECT.md` file for more info about setting up new projects.
     - You should end up with Grafana running on port 3001 on your server's IP: `http://X.Y.Z.V:3001`.
+    - This deployment uses `147.75.97.234:3001`.
 14. Configure Grafana
-    - Login as "admin/admin" to `http://X.Y.Z.V:3001`
-    - Choose Configuration -> data sources, then Add PostgreSQL DB with those settings:
+    - Login as "admin/admin" to `http://X.Y.Z.V:3001`, change password to something more secure.
+    - Choose "Add data source" or Configuration -> data sources, then add PostgreSQL DB with those settings:
     - Name "psql", Type "PostgreSQL", host "127.0.0.1:5432", database "your_project", user "ro_user" (this is the select-only user for psql), password you used for `PG_PASS_RO`, ssl-mode "disabled".
     - Run `devel/put_all_charts.sh`, then go to Home -> Manage: select "Dashboards" dashboard, and click star icon to make it favorite.
     - Go to Configuration -> Preferences, change Organization name to "Your project" - this will allow anonymous access, change "Home dashboard" to "Dashboards".
     - Go to User -> Preferences and and set Home dashboard to "Dashboards" (you can only choose one of favorites).
-    - Logout and ten remove `/login` part from the redirected URL. You should be able to access dashboards as an anonymous user.
+    - Sign out and ten remove `/login` part from the redirected URL. You should be able to access dashboards as an anonymous user.
     - If all is fine, cleanup local Grafana DB copies: `Run `devel/put_all_charts_cleanup.sh`.
