@@ -2,6 +2,8 @@
 
 This is installed [here](http://147.75.97.234:3001), it uses neither DNS nor SSL.
 
+It runs on Ubuntu 18.04 LTS on an ARM64 architecture.
+
 - To install: `vim INSTALL_UBUNTU18.md`.
 - To deploy use: `PG_PASS=... PG_PASS_RO=... PG_PASS_TEAM=... ./deploy.sh`.
 - To run sync manually (update since last run without cron) use: `PG_PASS=... ./run.sh`.
