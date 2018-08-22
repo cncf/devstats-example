@@ -9,14 +9,26 @@
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations \u0026 Alerts",
         "type": "dashboard"
+      },
+      {
+        "datasource": "psql",
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(255, 96, 96, 1)",
+        "limit": 100,
+        "name": "Releases",
+        "rawQuery": "select extract(epoch from time) AS time, title as text, description as tags from sannotations where $__timeFilter(time)",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
       }
     ]
   },
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
-  "iteration": 1527062522617,
+  "id": 1,
+  "iteration": 1534950737132,
   "links": [],
   "panels": [
     {
@@ -122,7 +134,11 @@
           "min": "0",
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -227,7 +243,11 @@
           "min": "0",
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -331,7 +351,11 @@
           "min": "0",
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": false,
@@ -359,6 +383,7 @@
         "query": "select value_s from gha_vars where name = 'full_name'",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
@@ -421,6 +446,7 @@
           }
         ],
         "query": "h,d,w,m,q,y",
+        "skipUrlSync": false,
         "type": "custom"
       },
       {
@@ -439,6 +465,7 @@
         "query": "select '\"' || repo_group_name || '\"' from trepo_groups order by 1",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
@@ -480,5 +507,5 @@
   "timezone": "",
   "title": "Activity repository groups",
   "uid": "1",
-  "version": 10
+  "version": 3
 }
