@@ -119,7 +119,6 @@ then
   MODE=ss FROM='{{url}}' TO="$host" replacer "$cfile" || exit 23
   MODE=ss FROM='{{bind}}' TO="$bind" replacer "$cfile" || exit 24
   MODE=ss FROM='{{port}}' TO="$PORT" replacer "$cfile" || exit 25
-  MODE=ss FROM='{{pwd}}' TO="$PG_PASS" replacer "$cfile" || exit 26
   MODE=ss FROM=';google_analytics_ua_id =' TO="-" replacer "$cfile" || exit 27
   MODE=ss FROM='{{ga}}' TO="$ga" replacer "$cfile" || exit 28
   MODE=ss FROM='{{test}}' TO="-" replacer "$cfile" || exit 29
