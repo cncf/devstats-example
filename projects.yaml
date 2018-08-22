@@ -1,0 +1,16 @@
+---
+projects:
+  homebrew:
+    order: 1
+    name: Homebrew
+    status: "-"
+    command_line:
+      - Homebrew
+    start_date: 2015-01-01T00:00:00Z
+    join_date: null
+    psql_db: homebrew
+    main_repo: 'homebrew/brew'
+    annotation_regexp: '^\d+\.\d+\.\d+$'
+    files_skip_pattern: ''
+    env:
+      EXAMPLE: value
