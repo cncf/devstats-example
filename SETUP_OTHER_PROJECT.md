@@ -1,6 +1,6 @@
 # Setup you own project
 
-This example deployment uses Homebrew project. To run devstats on the other project do:
+This example deployment uses Homebrew project. To run DevStats on the other project do:
 
 - Rename `homebrew` folder to `your_project` and update `your_project/psql.sh`.
 - Update `grafana.sh`, vim: `s/homebrew/your_project/g`.
