@@ -9,6 +9,6 @@ projects:
     start_date: 2015-01-01T00:00:00Z
     join_date: null
     psql_db: homebrew
-    main_repo: 'homebrew/brew'
+    main_repo: 'Homebrew/brew'
     annotation_regexp: '^\d+\.\d+\.\d+$'
     files_skip_pattern: ''
