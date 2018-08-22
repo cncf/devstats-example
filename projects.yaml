@@ -12,5 +12,3 @@ projects:
     main_repo: 'homebrew/brew'
     annotation_regexp: '^\d+\.\d+\.\d+$'
     files_skip_pattern: ''
-    env:
-      EXAMPLE: value
