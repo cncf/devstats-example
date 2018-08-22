@@ -6,4 +6,3 @@ then
  fi
 cd "$DEVSTATS_DIR"
 ./run.sh || exit 1
-echo "Sync done."
