@@ -54,6 +54,7 @@ Prerequisites:
     - Go to: `https://grafana.com/grafana/download`. prefer newest nightly build.
     - `wget https://s3-us-west-2.amazonaws.com/grafana-releases/master/grafana_5.x.x_amd64.deb`.
     - `sudo dpkg -i grafana_5.x.x_amd64.deb`
+    - `service grafana-server stop` - stop default grafana, we only need it as a source of configuration, binaries etc.
 13. Run automatic deploy
     - `PG_PASS=... PG_PASS_RO=... PG_PASS_TEAM=... ./deploy.sh`.
     - You can also take a look at DevStats' `ADDING_NEW_PROJECT.md` file for more info about setting up new projects.

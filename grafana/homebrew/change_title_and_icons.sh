@@ -18,10 +18,4 @@ cp -n ${GRAFANA_DATA}/public/img/grafana_net_logo.svg ${GRAFANA_DATA}/public/img
 cp grafana/img/homebrew.svg ${GRAFANA_DATA}/public/img/grafana_net_logo.svg || exit 1
 cp -n ${GRAFANA_DATA}/public/img/fav32.png ${GRAFANA_DATA}/public/img/fav32.png.bak
 cp grafana/img/homebrew32.png ${GRAFANA_DATA}/public/img/fav32.png || exit 1
-cp -n ${GRAFANA_DATA}/public/img/fav16.png ${GRAFANA_DATA}/public/img/fav16.png.bak
-cp grafana/img/homebrew32.png ${GRAFANA_DATA}/public/img/fav16.png || exit 1
-cp -n ${GRAFANA_DATA}/public/img/fav_dark_16.png ${GRAFANA_DATA}/public/img/fav_dark_16.png.bak
-cp grafana/img/homebrew32.png ${GRAFANA_DATA}/public/img/fav_dark_16.png || exit 1
-cp -n ${GRAFANA_DATA}/public/img/fav_dark_32.png ${GRAFANA_DATA}/public/img/fav_dark_32.png.bak
-cp grafana/img/homebrew32.png ${GRAFANA_DATA}/public/img/fav_dark_32.png || exit 1
 echo 'OK'
