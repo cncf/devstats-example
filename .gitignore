@@ -28,6 +28,7 @@ jsons/*.yaml
 /idb_vars
 /merge_pdbs
 /pdb_vars
+/update_encrypted_email
 /z2influx
 /FROM
 /TO
