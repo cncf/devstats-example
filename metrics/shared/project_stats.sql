@@ -16,7 +16,10 @@ from (
     {{period:e.created_at}}
     and e.repo_id = r.id
     and (lower(e.dup_actor_login) {{exclude_bots}})
-    and e.type in ('PushEvent', 'PullRequestEvent', 'IssuesEvent')
+    and e.type in (
+      'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+      'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
+    )
   ) sub
 where
   sub.repo_group is not null
@@ -30,7 +33,10 @@ from
 where
   {{period:created_at}}
   and (lower(dup_actor_login) {{exclude_bots}})
-  and type in ('PushEvent', 'PullRequestEvent', 'IssuesEvent')
+  and type in (
+    'PushEvent', 'PullRequestEvent', 'IssuesEvent',
+    'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewCommentEvent'
+  )
 union select sub.repo_group,
   'Commits' as name,
   count(distinct sub.sha) as value
@@ -202,6 +208,36 @@ from
 where
   {{period:created_at}}
   and (lower(dup_user_login) {{exclude_bots}})
+union select sub.repo_group,
+  'Commits authors' as name,
+  count(distinct sub.encrypted_email) as value
+from (
+  select 'pstat,' || coalesce(ecf.repo_group, r.repo_group) as repo_group,
+    c.encrypted_email
+  from
+    gha_repos r,
+    gha_commits c
+  left join
+    gha_events_commits_files ecf
+  on
+    ecf.event_id = c.event_id
+  where
+    {{period:c.dup_created_at}}
+    and c.dup_repo_id = r.id
+    and (lower(c.dup_actor_login) {{exclude_bots}})
+  ) sub
+where
+  sub.repo_group is not null
+group by
+  sub.repo_group
+union select 'pstat,All' as repo_group,
+  'Commits authors' as name,
+  count(distinct encrypted_email) as value
+from
+  gha_commits
+where
+  {{period:dup_created_at}}
+  and (lower(dup_actor_login) {{exclude_bots}})
 union select sub.repo_group,
   'Issues' as name,
   count(distinct sub.id) as value
