@@ -236,7 +236,7 @@ union select 'pstat,All' as repo_group,
   'Commits authors' as name,
 -- TODO:
 --  count(distinct encrypted_email) as value
-  count(distinct author_email) as value
+  count(distinct author_name) as value
 from
   gha_commits
 where
