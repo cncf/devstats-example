@@ -33,7 +33,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 6,
-  "iteration": 1535963848598,
+  "iteration": 1535965160796,
   "links": [],
   "panels": [
     {
@@ -284,8 +284,8 @@
       {
         "allValue": null,
         "current": {
-          "text": "CNCF",
-          "value": "CNCF"
+          "text": "Homebrew",
+          "value": "Homebrew"
         },
         "datasource": "psql",
         "hide": 2,
@@ -309,8 +309,8 @@
         "allValue": null,
         "current": {
           "tags": [],
-          "text": "Week",
-          "value": "w"
+          "text": "24 Hours MA",
+          "value": "h24"
         },
         "hide": 0,
         "includeAll": false,
@@ -486,7 +486,7 @@
     ]
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {
@@ -517,5 +517,5 @@
   "timezone": "",
   "title": "Users stats",
   "uid": "48",
-  "version": 2
+  "version": 4
 }
