@@ -28,7 +28,7 @@ Prerequisites:
     - [errcheck](https://github.com/kisielk/errcheck): `go get github.com/kisielk/errcheck`
 2. Go to `$GOPATH/src/` and clone devstats there:
     - `git clone https://github.com/cncf/devstats.git`, cd `devstats`
-    - Set reuse TCP connections: `./scripts/net_tcp_config.sh`
+    - Set reuse TCP connections: `./cron/net_tcp_config.sh`
 4. Go to devstats directory, so you are in `~/dev/go/src/devstats` directory and compile binaries:
     - `make`
 5. If compiled sucessfully then execute test coverage that doesn't need databases:
