@@ -30,6 +30,8 @@ jsons/*.yaml
 /pdb_vars
 /update_encrypted_email
 /z2influx
+/devstats_api_server
+/gha2es
 /FROM
 /TO
 errors.txt
