@@ -59,7 +59,7 @@ Prerequisites:
     - `PG_PASS=... PG_PASS_RO=... PG_PASS_TEAM=... ./deploy.sh`.
     - You can also take a look at DevStats' `ADDING_NEW_PROJECT.md` file for more info about setting up new projects.
     - You should end up with Grafana running on port 3001 on your server's IP: `http://X.Y.Z.V:3001`.
-    - This deployment uses `147.75.97.234:3001`.
+    - This deployment uses `147.75.105.130:3001`.
 11. Configure Grafana
     - Login as "admin/admin" to `http://X.Y.Z.V:3001`, change password to something more secure.
     - Choose "Add data source" or Configuration -> data sources, then add PostgreSQL DB with those settings:
