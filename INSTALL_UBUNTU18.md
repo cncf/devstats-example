@@ -36,7 +36,7 @@ Prerequisites:
     - `make test`
     - Tests should pass.
 6. Install binaries & metrics:
-    - `sudo make install`
+    - `sudo make install` or `make install` as root.
 7. Install Postgres database ([link](https://gist.github.com/sgnl/609557ebacd3378f3b72)):
     - `apt install postgresql`.
     - `devstats` repo directory must be available for postgres user. `chmod -R ugo+r /data/`.
@@ -46,6 +46,7 @@ Prerequisites:
     - Set bigger maximum number of connections, at least 4x number of your CPU cores or more: `/etc/postgresql/10/main/postgresql.conf`. Default is 100. `max_connections = 300`.
     - You can also set `shared_buffers = ...` to something like 25% of your RAM. This is optional.
     - `service postgresql restart`
+    - `swapoff -a` and remove any swap from `/etc/fstab`.
 8. Clone `devstats-example`. It demonstrates DevStats setup for a `github.com/homebrew` org.
     - `git clone https://github.com/cncf/devstats-example.git`, cd `devstats`
     - See `SETUP_OTHER_PROJECT.md` to see how to enable DevStats on your own project.
