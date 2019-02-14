@@ -2,6 +2,8 @@
 
 This example deployment uses Homebrew project. To run DevStats on the other project do:
 
+- If your project name is for example 'Sample Project' then run `./set_project_name.sh sampleproject 'Sample Project'`. First parameter is a special lowercased name of your project, second parameter is the original project name.
+
 - In all steps: note that you have a lower-case project name `homebrew` and full name `Homebrew` (for example used as Grafana Org name etc).
 - Update `grafana.sh`, vim: `s/homebrew/your_project/g`.
 - Update `projects.yaml` to contain your new project data.
