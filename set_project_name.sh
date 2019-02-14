@@ -2,30 +2,39 @@
 if [ -z "$1" ]
 then
   echo "$0: missing first parameter: lower case project name"
-  echo "Usage: $0 lower_case_project_name 'Project Name' 'project_org/main_repo'"
+  echo "Usage: $0 lower_case_project_name 'Project Name' 'project_org/main_repo' start-date"
   exit 1
 fi
 
 if [ -z "$2" ]
 then
   echo "$0: missing second parameter: 'Project Name'"
-  echo "Usage: $0 lower_case_project_name 'Project Name' 'project_org/main_repo'"
+  echo "Usage: $0 lower_case_project_name 'Project Name' 'project_org/main_repo' start-date"
   exit 2
 fi
 
 if [ -z "$3" ]
 then
   echo "$0: missing third parameter: 'project_org/main_repo'"
-  echo "Usage: $0 lower_case_project_name 'Project Name' 'project_org/main_repo'"
+  echo "Usage: $0 lower_case_project_name 'Project Name' 'project_org/main_repo' start-date"
   exit 3
+fi
+
+if [ -z "$4" ]
+then
+  echo "$0: missing fourth parameter: start-date in YYYY-MM-DD format (>= 2015-01-01)"
+  echo "Usage: $0 lower_case_project_name 'Project Name' 'project_org/main_repo' start-date"
+  exit 4
 fi
 
 to_lowername=$1
 to_fullname=$2
 to_repo=$3
-from_lowername=$4
-from_fullname=$5
-from_repo=$6
+to_date=$4
+from_lowername=$5
+from_fullname=$6
+from_repo=$7
+from_date=$8
 
 if [ -z "$from_lowername" ]
 then
@@ -40,6 +49,11 @@ fi
 if [ -z "$from_repo" ]
 then
   from_repo='Homebrew/brew'
+fi
+
+if [ -z "$from_date" ]
+then
+  from_date='2015-01-01'
 fi
 
 IFS='/'
