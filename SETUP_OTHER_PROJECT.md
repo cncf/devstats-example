@@ -6,8 +6,7 @@ This example deployment uses Homebrew project. To run DevStats on the other proj
 - First parameter is a special lowercased name of your project, second parameter is the original project name, third parameter is a GitHub main repository path.
 
 - In all steps: note that you have a lower-case project name `homebrew` and full name `Homebrew` (for example used as Grafana Org name etc).
-- Update `projects.yaml` to contain your new project data, especially: `command_line, start_date, annotation_regexp`.
-- Update `devel/deploy_all.sh`, especially `PROJREPO` value.
+- Update `projects.yaml` to contain your new project data, especially: `command_line, start_date, annotation_regexp`. You can set `annotation_regexp` to `''` to get all annotations.
 - Rename `homebrew` folder to `your_project` and update `your_project/psql.sh`.
 - Rename `grafana/img/homebrew*` to `grafana/img/your_project*` (provide your own SVG and PNG).
 - Rename `grafana/homebrew` to `grafana/your_project` and update files in this directory.

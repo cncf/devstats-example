@@ -56,8 +56,8 @@ vim -c "%s/$from_lowername/$to_lowername/g|wq" ./projects.yaml
 vim -c "%s/$from_repo/$to_repo/g|wq" ./projects.yaml
 vim -c "%s/- $from_org/- $to_org/g|wq" ./projects.yaml
 vim -c "%s/$from_fullname/$to_fullname/g|wq" ./projects.yaml
-exit
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/deploy_all.sh
+vim -c "%s/$from_repo/$to_repo/g|wq" ./devel/deploy_all.sh
 vim -c "%s/$from_fullname/$to_fullname/g|wq" ./devel/deploy_all.sh
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/get_all_sqlite_jsons.sh
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/put_all_charts.sh
