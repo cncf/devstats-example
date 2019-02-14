@@ -64,3 +64,6 @@ vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/put_all_charts.sh
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/add_single_metric_all.sh
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/create_psql_user.sh
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./crontab
+vim -c "%s/$from_lowername/$to_lowername/g|wq" "./$from_lowername/psql.sh"
+vim -c "%s/$from_org/$to_org/g|wq" "./$from_lowername/psql.sh"
+mv "./$from_lowername" "./$to_lowername"
