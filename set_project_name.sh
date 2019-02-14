@@ -89,3 +89,6 @@ vim -c "%s/$from_lowername/$to_lowername/g|wq" "./grafana/$from_lowername/change
 vim -c "%s/$from_fullname/$to_fullname/g|wq" "./grafana/$from_lowername/change_title_and_icons.sh"
 vim -c "%s/$from_lowername/$to_lowername/g|wq" "./grafana/$from_lowername/grafana_start.sh"
 mv "./grafana/$from_lowername" "./grafana/$to_lowername" || exit 8
+MODE=ss0 FROM="\"$from_lowername\"" TO="\"$to_lowername\"" FILES=`find "./grafana/dashboards/$from_lowername/" -type f -iname '*.json'` ./devel/mass_replace.sh
+MODE=ss0 FROM="\"$from_fullname\"" TO="\"$to_fullname\"" FILES=`find "./grafana/dashboards/$from_lowername/" -type f -iname '*.json'` ./devel/mass_replace.sh
+mv "./grafana/dashboards/$from_lowername" "./grafana/dashboards/$to_lowername" || exit 9
