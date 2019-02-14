@@ -92,3 +92,7 @@ mv "./grafana/$from_lowername" "./grafana/$to_lowername" || exit 8
 MODE=ss0 FROM="\"$from_lowername\"" TO="\"$to_lowername\"" FILES=`find "./grafana/dashboards/$from_lowername/" -type f -iname '*.json'` ./devel/mass_replace.sh
 MODE=ss0 FROM="\"$from_fullname\"" TO="\"$to_fullname\"" FILES=`find "./grafana/dashboards/$from_lowername/" -type f -iname '*.json'` ./devel/mass_replace.sh
 mv "./grafana/dashboards/$from_lowername" "./grafana/dashboards/$to_lowername" || exit 9
+vim -c "%s/$from_lowername/$to_lowername/g|wq" "./metrics/$from_lowername/vars.yaml"
+vim -c "%s/$from_fullname/$to_fullname/g|wq" "./metrics/$from_lowername/vars.yaml"
+mv "./metrics/$from_lowername" "./metrics/$to_lowername" || exit 10
+mv "./scripts/$from_lowername" "./scripts/$to_lowername" || exit 11
