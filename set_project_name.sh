@@ -82,4 +82,10 @@ vim -c "%s/$from_lowername/$to_lowername/g|wq" ./crontab
 vim -c "%s/$from_lowername/$to_lowername/g|wq" "./$from_lowername/psql.sh"
 vim -c "%s/$from_date/$to_date/g|wq" "./$from_lowername/psql.sh"
 vim -c "%s/$from_org/$to_org/g|wq" "./$from_lowername/psql.sh"
-mv "./$from_lowername" "./$to_lowername"
+mv "./$from_lowername" "./$to_lowername" || exit 5
+mv "grafana/img/${from_lowername}.svg" "grafana/img/${to_lowername}.svg" || exit 6
+mv "grafana/img/${from_lowername}32.png" "grafana/img/${to_lowername}32.png" || exit 7
+vim -c "%s/$from_lowername/$to_lowername/g|wq" "./grafana/$from_lowername/change_title_and_icons.sh"
+vim -c "%s/$from_fullname/$to_fullname/g|wq" "./grafana/$from_lowername/change_title_and_icons.sh"
+vim -c "%s/$from_lowername/$to_lowername/g|wq" "./grafana/$from_lowername/grafana_start.sh"
+mv "./grafana/$from_lowername" "./grafana/$to_lowername" || exit 8
