@@ -8,6 +8,6 @@ proj=$GHA2DB_PROJECT
 echo "Setting up $proj repository groups sync script"
 sudo -u postgres psql $PG_DB -c "insert into gha_postprocess_scripts(ord, path) select 0, 'scripts/$proj/repo_groups.sql' on conflict do nothing"
 echo "Setting $proj up default postprocess scripts"
-./runq util_sql/default_postprocess_scripts.sql
+runq util_sql/default_postprocess_scripts.sql
 echo "Setting $proj up repository groups postprocess script"
-./runq util_sql/repo_groups_postprocess_script_from_repos.sql
+runq util_sql/repo_groups_postprocess_script_from_repos.sql

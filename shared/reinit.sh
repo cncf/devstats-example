@@ -19,8 +19,8 @@ then
   ./devel/drop_ts_tables.sh "$PG_DB" || exit 2
   sudo -u postgres psql "$PG_DB" -c "delete from gha_vars" || exit 3
   sudo -u postgres psql "$PG_DB" -c "delete from gha_computed" || exit 4
-  GHA2DB_LOCAL=1 ./vars || exit 5
-  GHA2DB_CMDDEBUG=1 GHA2DB_RESETTSDB=1 GHA2DB_LOCAL=1 ./gha2db_sync || exit 6
+  GHA2DB_LOCAL=1 vars || exit 5
+  GHA2DB_CMDDEBUG=1 GHA2DB_RESETTSDB=1 GHA2DB_LOCAL=1 gha2db_sync || exit 6
 else
   db=$PG_DB
   tdb="${PG_DB}_temp"
@@ -30,8 +30,8 @@ else
   ./devel/drop_ts_tables.sh $tdb || exit 10
   sudo -u postgres psql $tdb -c "delete from gha_vars" || exit 11
   sudo -u postgres psql $tdb -c "delete from gha_computed" || exit 12
-  GHA2DB_LOCAL=1 PG_DB=$tdb ./vars || exit 13
-  GHA2DB_CMDDEBUG=1 GHA2DB_RESETTSDB=1 GHA2DB_LOCAL=1 PG_DB=$tdb ./gha2db_sync || exit 14
+  GHA2DB_LOCAL=1 PG_DB=$tdb vars || exit 13
+  GHA2DB_CMDDEBUG=1 GHA2DB_RESETTSDB=1 GHA2DB_LOCAL=1 PG_DB=$tdb gha2db_sync || exit 14
   ./devel/drop_psql_db.sh $db || exit 15
   sudo -u postgres psql -c "select pg_terminate_backend(pid) from pg_stat_activity where datname = '$tdb'" || exit 16
   sudo -u postgres psql -c "alter database \"$tdb\" rename to \"$db\"" || exit 17

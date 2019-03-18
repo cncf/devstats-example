@@ -6,4 +6,4 @@ then
 fi
 proj=$GHA2DB_PROJECT
 echo "Setting up $proj repository groups"
-./runq "scripts/$proj/repo_groups.sql"
+runq "scripts/$proj/repo_groups.sql"
