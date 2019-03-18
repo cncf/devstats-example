@@ -23,3 +23,8 @@ tags:
     series_name: event_types
     name_tag: event_type_name
     value_tag: event_type_value
+  - name: Repos
+    sql: repos_tags
+    series_name: repos
+    name_tag: repo_name
+    limit: 500
