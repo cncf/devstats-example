@@ -57,6 +57,7 @@ Prerequisites:
     - `sudo dpkg -i grafana_5.x.x_amd64.deb`
     - `service grafana-server stop` - stop default Grafana, we only need it as a source of configuration, binaries etc.
 10. Run automatic deploy
+    - Create `/etc/github/oauth` file containing GitHub OAuth key or `/etc/github/oauths` conatining comma separated list of keys or update `run.sh` and `deploy.sh` adding `GHA2DB_GHAPISKIP=1` to skip processing GitHub API.
     - `PG_PASS=... PG_PASS_RO=... PG_PASS_TEAM=... ./deploy.sh`.
     - You can also take a look at DevStats' `ADDING_NEW_PROJECT.md` file for more info about setting up new projects.
     - You should end up with Grafana running on port 3001 on your server's IP: `http://X.Y.Z.V:3001`.
