@@ -12,7 +12,7 @@ Prerequisites:
     ```
     - Check if language/locale settings are ok: `perl -e exit`.
     - `apt install golang` - this installs Go 1.10.1.
-    - `apt install git psmisc jsonlint yamllint gcc`
+    - `apt install git psmisc jsonlint yamllint gcc sqlite3 libfontconfig`
     - `mkdir /data; mkdir /data/dev`
 1. Configure Go:
     - For example add to `~/.bash_profile`:
@@ -38,7 +38,7 @@ Prerequisites:
     - `sudo make install` or `make install` as root.
 7. Install Postgres database ([link](https://gist.github.com/sgnl/609557ebacd3378f3b72)):
     - `apt install postgresql`.
-    - `devstats` repo directory must be available for postgres user. `chmod -R ugo+r ~/dev/`.
+    - `devstats` repo directory must be available for postgres user. `chmod -R ugo+r /data/dev/`.
     - `sudo -i -u postgres`, `psql` and as root `sudo -u postgres psql` to test installation.
     - Postgres only allows local connections by default so it is secure, we don't need to disable external connections:
     - Config file is: `/etc/postgresql/10/main/pg_hba.conf`, instructions to enable external connections (not recommended): `http://www.thegeekstuff.com/2014/02/enable-remote-postgresql-connection/?utm_source=tuicool`
@@ -47,6 +47,7 @@ Prerequisites:
     - `service postgresql restart`
     - `swapoff -a` and remove any swap from `/etc/fstab`.
 8. Clone `devstats-example`. It demonstrates DevStats setup for a `github.com/homebrew` org.
+    - `cd $GOPATH/src/` and clone devstats-example there:
     - `git clone https://github.com/cncf/devstats-example.git`, cd `devstats-example`
     - Set reuse TCP connections: `./cron/net_tcp_config.sh`
     - See `SETUP_OTHER_PROJECT.md` to see how to enable DevStats on your own project.
@@ -62,13 +63,5 @@ Prerequisites:
     - This deployment uses `147.75.105.130:3001`.
 11. Configure Grafana
     - Login as "admin/admin" to `http://X.Y.Z.V:3001`, change password to something more secure.
-    - Choose "Add data source" or Configuration -> data sources, then add PostgreSQL DB with those settings:
-    - Name "psql", Type "PostgreSQL", host "127.0.0.1:5432", database "your_project" (`homebrew` in this case), user "ro_user" (this is the select-only user for psql), password you used for `PG_PASS_RO`, ssl-mode "disabled".
-    - Run `devel/put_all_charts.sh`, then go to Home -> Manage: select "Dashboards" dashboard, and click star icon to make it favorite.
-    - Go to Configuration -> Preferences, change Organization name to "Your project" - this will allow anonymous access, change "Home dashboard" to "Dashboards".
-    - Go to User -> Preferences and and set Home dashboard to "Dashboards" (you can only choose from favorites).
-    - Sign out and ten remove `/login` part from the redirected URL. You should be able to access dashboards as an anonymous user.
-    - If all is fine, cleanup local Grafana DB copies: `Run `devel/put_all_charts_cleanup.sh`.
-    - If you have modified dashboards on the Grafana UI, download them as JSONs: `./devel/get_all_sqlite_jsons.sh`.
     - cp devstats.sh $GOPATH/bin/
     - You can use `crontab` file as an example of enabling hourly cron sync: `crontab -e`
