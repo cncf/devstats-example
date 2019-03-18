@@ -1,0 +1,15 @@
+---
+acquisitions:
+  - ['(?i)^kismatic$', Apprenda]
+  - ['(?i)^(deis|github)$', Microsoft]
+  - ['(?i)^wercker$', Oracle]
+  - ['(?i)^(plexistor|stack\s*point\s*cloud|greenqloud|netapp)(,?\s*inc\.?)?$', NetApp]
+  - ['(?i)^applatix$', Innuit]
+  - ['(?i)^core\s*os$', Red Hat]
+  - ['(?i)^codeship$', CloudBees]
+  - ['(?i)^netsil$', Nutanix]
+  - ['(?i)^horton\s*works$', Cloudera]
+  - ['(?i)^coscale$', New Relic]
+  - ['(?i)^heptio$', VMware]
+  - ['(?i)^(aws|amazon|amazon\s*aws|amazon\s*web\s*services|amazon\.com)$', Amazon]
+#  - ['(?i)^red\s*hat$', IBM]
