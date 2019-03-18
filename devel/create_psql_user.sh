@@ -19,7 +19,7 @@ else
 fi
 
 cp ./util_sql/drop_psql_user.sql /tmp/drop_user.sql || exit 1
-FROM="{{user}}" TO="$1" MODE=ss ./replacer /tmp/drop_user.sql || exit 1
+FROM="{{user}}" TO="$1" MODE=ss replacer /tmp/drop_user.sql || exit 1
 
 if [ ! -z "$DROP" ]
 then

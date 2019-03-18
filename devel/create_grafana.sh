@@ -2,7 +2,7 @@
 # GGET=1 (Get grafana.db from the $HOST_SRC server)
 # STOP=1 (Stops running grafana-server instance)
 # RM=1 (only with STOP, get rid of all grafana data before proceeding)
-# IMPJSONS=1 (will import all jsons defined for given project using sqlitedb tool), if used with GGET - it will first fetch from server and then import
+# SKIPINIT=1 (will skip importing all jsons defined for given project using sqlitedb tool and will skip seting default dashboard etc.)
 # EXTERNAL=1 (will expose Grafana to outside world: will bind to 0.0.0.0 instead of 127.0.0.1, useful when no Apache proxy + SSL is enabled)
 set -o pipefail
 if ( [ -z "$PG_PASS" ] || [ -z "$PORT" ] || [ -z "$GA" ] || [ -z "$ICON" ] || [ -z "$ORGNAME" ] || [ -z "$PROJ" ] || [ -z "$PROJDB" ] || [ -z "$GRAFSUFF" ] )
@@ -26,6 +26,16 @@ then
   ga=";"
 else
   ga="google_analytics_ua_id = $GA"
+fi
+
+if [ -z "$PG_HOST" ]
+then
+  PG_HOST='127.0.0.1'
+fi
+
+if [ -z "$PG_PORT" ]
+then
+  PG_PORT='5432'
 fi
 
 if [ ! -z "$EXTERNAL" ]
@@ -94,6 +104,13 @@ then
     fi
   fi
   GRAFANA_DATA="/usr/share/grafana.$GRAFSUFF/" ./grafana/$PROJ/change_title_and_icons.sh || exit 16
+
+  cp ./grafana/shared/datasource.yaml.example "/usr/share/grafana.$GRAFSUFF/conf/provisioning/datasources/datasources.yaml" || exit 39
+  cfile="/usr/share/grafana.$GRAFSUFF/conf/provisioning/datasources/datasources.yaml"
+  MODE=ss FROM='{{url}}' TO="${PG_HOST}:${PG_PORT}" replacer "$cfile" || exit 40
+  MODE=ss FROM='{{PG_PASS}}' TO="${PG_PASS}" replacer "$cfile" || exit 41
+  MODE=ss FROM='{{PG_DB}}' TO="${PROJDB}" replacer "$cfile" || exit 42
+  MODE=ss FROM='{{PG_USER}}' TO="ro_user" replacer "$cfile" || exit 43
 fi
 
 if [ ! -d "/var/lib/grafana.$GRAFSUFF/" ]
@@ -133,14 +150,62 @@ then
   echo "started"
 fi
 
-if [ ! -z "$IMPJSONS" ]
+if [ -z "$SKIPINIT" ]
 then
-  while [ ! -f "/var/lib/grafana.$PROJ/grafana.db" ]
+  # Wait for start and update its SQLite database after configured provisioning is finished
+  n=0
+  sleep 3
+  while true
   do
-    echo "Waiting for /var/lib/grafana.$PROJ/grafana.db to be created"
-    sleep 1
+    started=`grep 'HTTP Server Listen' /var/log/grafana.$GRAFSUFF.log`
+    if [ -z "$started" ]
+    then
+      sleep 1
+      ((n++))
+      if [ "$n" = "30" ]
+      then
+        echo "waited too long, exiting"
+        exit 44
+      fi
+      continue
+    fi
+    pid=`ps -axu | grep grafana-server | grep $GRAFSUFF | awk '{print $2}'`
+    if [ -z "$pid" ]
+    then
+      echo "grafana $GRAFSUFF not found, existing"
+      exit 45
+    else
+      break
+    fi
   done
-  sleep 1
-  GRAFANA=$GRAFSUFF NOCOPY=1 ./devel/import_jsons_to_sqlite.sh ./grafana/dashboards/$PROJ/* || exit 37
+  sleep 3
+  # GRAFANA=$GRAFSUFF NOCOPY=1 ./devel/import_jsons_to_sqlite.sh ./grafana/dashboards/$PROJ/* || exit 37
+  echo 'provisioning dashboards'
+  sqlitedb "/var/lib/grafana.$GRAFSUFF/grafana.db" grafana/dashboards/$PROJ/*.json || exit 37
+  echo 'provisioning preferences'
+  cfile="/etc/grafana.$GRAFSUFF/update_sqlite.sql"
+  cp "grafana/shared/update_sqlite.sql" "$cfile" || exit 46
+  uid=8
+  MODE=ss FROM='{{uid}}' TO="${uid}" replacer "$cfile" || exit 47
+  MODE=ss FROM='{{org}}' TO="${ORGNAME}" replacer "$cfile" || exit 48
+  sqlite3 -echo -header -csv "/var/lib/grafana.$GRAFSUFF/grafana.db" < "$cfile" || exit 49
+
+  # Optional SQL (newer Grafana has team_id field which si not present in the older one)
+  cfile="/etc/grafana.$GRAFSUFF/update_sqlite_optional.sql"
+  cp "grafana/shared/update_sqlite_optional.sql" "$cfile"
+  MODE=ss FROM='{{uid}}' TO="${uid}" replacer "$cfile"
+  MODE=ss FROM='{{org}}' TO="${ORGNAME}" replacer "$cfile"
+  sqlite3 -echo -header -csv "/var/lib/grafana.$GRAFSUFF/grafana.db" < "$cfile"
+
+  # Per project specific grafana updates
+  if [ -f "grafana/${PROJ}/custom_sqlite.sql" ]
+  then
+    echo 'provisioning other preferences (project specific)'
+    cfile="/etc/grafana.$GRAFSUFF/custom_sqlite.sql"
+    cp "grafana/${PROJ}/custom_sqlite.sql" "$cfile" || exit 46
+    MODE=ss FROM='{{uid}}' TO="${uid}" replacer "$cfile"
+    MODE=ss FROM='{{org}}' TO="${ORGNAME}" replacer "$cfile"
+    sqlite3 -echo -header -csv "/var/lib/grafana.$GRAFSUFF/grafana.db" < "$cfile" || exit 23
+  fi
 fi
 echo "$0: $PROJ finished"
