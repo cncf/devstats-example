@@ -10,7 +10,7 @@ then
   exit 2
 fi
 cp /var/lib/grafana.$GRAFANA/grafana.db ./grafana.$GRAFANA.db || exit 4
-./sqlitedb ./grafana.$GRAFANA.db $* || exit 5
+sqlitedb ./grafana.$GRAFANA.db $* || exit 5
 ./devel/grafana_stop.sh $GRAFANA || exit 6
 cp ./grafana.$GRAFANA.db /var/lib/grafana.$GRAFANA/grafana.db || exit 7
 ./devel/grafana_start.sh $GRAFANA || exit 8

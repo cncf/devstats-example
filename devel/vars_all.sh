@@ -22,6 +22,6 @@ do
     fi
     echo "Project: $proj, PDB: $db"
     sudo -u postgres psql "$db" -c "delete from gha_vars" || exit 1
-    GHA2DB_LOCAL=1 GHA2DB_PROJECT=$proj PG_DB=$db ./vars || exit 2
+    GHA2DB_LOCAL=1 GHA2DB_PROJECT=$proj PG_DB=$db vars || exit 2
 done
 echo 'OK'
