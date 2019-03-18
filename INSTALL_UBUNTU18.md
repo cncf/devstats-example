@@ -28,9 +28,8 @@ Prerequisites:
     - [errcheck](https://github.com/kisielk/errcheck): `go get -u github.com/kisielk/errcheck`
     - If you want to use ElasticSearch output: [elastic](https://github.com/olivere/elastic): `go get -u github.com/olivere/elastic`.
 2. Go to `$GOPATH/src/` and clone devstats there:
-    - `git clone https://github.com/cncf/devstats.git`, cd `devstats`
-    - Set reuse TCP connections: `./cron/net_tcp_config.sh`
-4. Go to devstats directory, so you are in `~/dev/go/src/devstats` directory and compile binaries:
+    - `git clone https://github.com/cncf/devstatscode.git`, cd `devstatscode`
+4. Go to devstats directory, so you are in `~/dev/go/src/devstatscode` directory and compile binaries:
     - `make`
 5. If compiled sucessfully then execute test coverage that doesn't need databases:
     - `make test`
@@ -39,7 +38,7 @@ Prerequisites:
     - `sudo make install` or `make install` as root.
 7. Install Postgres database ([link](https://gist.github.com/sgnl/609557ebacd3378f3b72)):
     - `apt install postgresql`.
-    - `devstats` repo directory must be available for postgres user. `chmod -R ugo+r /data/`.
+    - `devstats` repo directory must be available for postgres user. `chmod -R ugo+r ~/dev/`.
     - `sudo -i -u postgres`, `psql` and as root `sudo -u postgres psql` to test installation.
     - Postgres only allows local connections by default so it is secure, we don't need to disable external connections:
     - Config file is: `/etc/postgresql/10/main/pg_hba.conf`, instructions to enable external connections (not recommended): `http://www.thegeekstuff.com/2014/02/enable-remote-postgresql-connection/?utm_source=tuicool`
@@ -48,7 +47,8 @@ Prerequisites:
     - `service postgresql restart`
     - `swapoff -a` and remove any swap from `/etc/fstab`.
 8. Clone `devstats-example`. It demonstrates DevStats setup for a `github.com/homebrew` org.
-    - `git clone https://github.com/cncf/devstats-example.git`, cd `devstats`
+    - `git clone https://github.com/cncf/devstats-example.git`, cd `devstats-example`
+    - Set reuse TCP connections: `./cron/net_tcp_config.sh`
     - See `SETUP_OTHER_PROJECT.md` to see how to enable DevStats on your own project.
 9. Install Grafana.
     - Go to: `https://grafana.com/grafana/download`. Prefer newest nightly build for your arch.
