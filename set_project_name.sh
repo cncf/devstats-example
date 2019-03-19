@@ -78,6 +78,7 @@ vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/get_all_sqlite_jsons.sh
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/put_all_charts.sh
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/add_single_metric_all.sh
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/create_psql_user.sh
+vim -c "%s/$from_lowername/$to_lowername/g|wq" ./devel/vars_all.sh
 vim -c "%s/$from_lowername/$to_lowername/g|wq" ./crontab
 vim -c "%s/$from_lowername/$to_lowername/g|wq" "./$from_lowername/psql.sh"
 vim -c "%s/$from_date/$to_date/g|wq" "./$from_lowername/psql.sh"
